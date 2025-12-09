@@ -104,7 +104,5 @@ As GLEU+, the penalty weight for mis-correction is removed, and the reference ma
 If you need the original version, see `chgleu_tuning.py` in `ChGLEU_tuning`  
 
 ## By
-**Wu Jiajun**
+**Wu Jiajun**  
 <https://github.com/jwj1111/ChGLEU>
-
-
