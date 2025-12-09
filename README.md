@@ -99,8 +99,8 @@ Example output:
 ```
 
 ## Note
-ChGLEU is adapted from the 2016 version of GLEU (GLEU+ / GLEU WITHOUT TUNING).
-As GLEU+, the penalty weight for mis-correction is removed, and the reference matching method is updated in ChGLEU.
+ChGLEU is adapted from the 2016 version of GLEU (GLEU+ / GLEU WITHOUT TUNING).  
+As GLEU+, the penalty weight for mis-correction is removed, and the reference matching method is updated in ChGLEU.  
 If you need the original version, see `chgleu_tuning.py` in `ChGLEU_tuning`
 
 ## GitHub Repository
