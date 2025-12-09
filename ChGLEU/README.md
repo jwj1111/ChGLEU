@@ -4,9 +4,9 @@ This repository contains a Python implementation of the **ChGLEU** metric, a spe
 ChGLEU is adapted from the GLEU metric proposed by Napoles et al. (2015, 2016). While the original GLEU was designed for English, **ChGLEU** is optimized for Chinese by employing **character-level n-gram** calculation to better handle Chinese issues.
 
 ## Acknowledgments
-This implementation is based on the logic described in the following papers. If you use the GLEU methodology, please acknowledge the original authors:
-    Napoles, C., Sakaguchi, K., Post, M., & Tetreault, J. (2015). Ground truth for grammatical error correction metrics. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers) (pp. 588–593). Association for Computational Linguistics. http://www.aclweb.org/anthology/P15-2097
-    Napoles, C., Sakaguchi, K., Post, M., & Tetreault, J. (2016). GLEU without tuning. arXiv. http://arxiv.org/abs/1605.02592
+This implementation is based on the logic described in the following papers. If you use the GLEU methodology, please acknowledge the original authors:  
+Napoles, C., Sakaguchi, K., Post, M., & Tetreault, J. (2015). Ground truth for grammatical error correction metrics. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers) (pp. 588–593). Association for Computational Linguistics. http://www.aclweb.org/anthology/P15-2097  
+Napoles, C., Sakaguchi, K., Post, M., & Tetreault, J. (2016). GLEU without tuning. arXiv. http://arxiv.org/abs/1605.02592  
 The code structure is also inspired by the BLEU implementation by Adam Lopez <https://github.com/alopez/dreamt/tree/master/reranker>.
 
 ## Why ChGLEU?
@@ -105,4 +105,5 @@ If you need the original version, see `chgleu_tuning.py` in `ChGLEU_tuning`
 
 ## By
 **Wu Jiajun**  
+
 08 December 2025  
