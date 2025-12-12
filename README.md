@@ -26,7 +26,7 @@ Traditional metrics like **M2 (MaxMatch)** or **ChERRANT** are designed for *Min
 
 ## Requirements
 - Python 3.x
-- Standard libraries: `math`, `argparse`, `random`, `collections`, `typing`
+- Standard libraries: `math`, `argparse`, `random`, `collections`, `typing`  
 No additional installation via `pip` is required.
 
 ## Usage
