@@ -1,6 +1,5 @@
 import math
 import argparse
-import sys
 from collections import Counter
 from typing import List, Generator, Union, Dict
 
@@ -259,4 +258,5 @@ def run_batch():
         print(batch_result)
 
 if __name__ == '__main__':
+
     run_batch()
