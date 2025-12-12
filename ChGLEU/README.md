@@ -26,7 +26,7 @@ Traditional metrics like **M2 (MaxMatch)** or **ChERRANT** are designed for *Min
 
 ## Requirements
 - Python 3.x
-- Standard libraries: `math`, `argparse`, `random`, `sys`, `collections`, `typing`
+- Standard libraries: `math`, `argparse`, `random`, `collections`, `typing`  
 No additional installation via `pip` is required.
 
 ## Usage
@@ -106,3 +106,4 @@ If you need the original version, see `chgleu_tuning.py` in `ChGLEU_tuning`
 ## By
 **Wu Jiajun**  
 <https://github.com/jwj1111/ChGLEU>
+
