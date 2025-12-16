@@ -1,7 +1,7 @@
-# ChGLEU: Chinese Grammatical Error Correction Metric
-This repository contains a Python implementation of the **ChGLEU** metric, a specialized evaluation metric for **Chinese Grammatical Error Correction (CGEC)** tasks.
+# ChGLEU: Tool for Chinese Grammatical Error Correction Metric
+This repository contains a Python implementation of **ChGLEU**, a specialized evaluation tool for **Chinese Grammatical Error Correction (CGEC)** tasks.
 
-ChGLEU is adapted from the GLEU metric proposed by Napoles et al. (2015, 2016). While the original GLEU was designed for English, **ChGLEU** is optimized for Chinese by employing **character-level n-gram** calculation to better handle Chinese issues.
+ChGLEU is adapted from GLEU proposed by Napoles et al. (2015, 2016). While the original GLEU was designed for English, **ChGLEU** is optimized for Chinese by employing **character-level n-gram** calculation to better handle Chinese issues.
 
 ## Acknowledgments
 This implementation is based on the logic described in the following papers. If you use the GLEU methodology, please acknowledge the original authors:  
@@ -106,4 +106,5 @@ If you need the original version, see `chgleu_tuning.py` in `ChGLEU_tuning`
 ## By
 **Wu Jiajun**  
 <https://github.com/jwj1111/ChGLEU>
+
 
