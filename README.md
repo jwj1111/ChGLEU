@@ -15,7 +15,7 @@ Traditional tools like **M2 (MaxMatch)** or **ChERRANT** are designed for *Minim
 **ChGLEU**, following the design of GLEU, is **Fluency-Oriented**. It is particularly suitable for evaluating **Large Language Models (LLMs)** for the following reasons:
 1.  **Reward for Fluency**: M2 / ChERRANT relies on strict span-level alignment. Unlike them, ChGLEU calculates character-level n-gram overlap. This allows it to reward substantial rewrites and stylistic improvements that align with human references, rather than just fixing localized grammatical errors.
 2.  **Penalty for Unchanged Errors**: ChGLEU also explicitly penalizes n-grams present in the Source (incorrect) but absent in the Reference (correct).
-3.  **Robustness to Over-Correction**: Modern LLMs tend to "over-correct" or polish text. M2 often scores these valid but non-minimal edits as false positives (low precision). The result by ChGLEU correlates much better with human judgments in these high-fluency scenarios.
+3.  **Robustness to Over-Correction**: Modern LLMs tend to "over-correct" or polish text. M2 often scores these valid but non-minimal edits as false positives (low precision). The result by ChGLEU ((character-level GLEU score)) correlates much better with human judgments in these high-fluency scenarios.
 
 ## Features
 - **Fluency-Oriented Evaluation**: Unlike M2 or ChERRANT which focus on minimal edits, ChGLEU rewards holistic sentence quality and naturalness, making it ideal for evaluating **Large Language Models (LLMs)** that tend to rewrite or polish text.
