@@ -1,4 +1,9 @@
-# ChGLEU: Fluency-Oriented Evaluation Tool for Chinese Grammatical Error Correction
+# ChGLEU: Fluency-Oriented Evaluation Tool for Chinese Grammatical Error Correction  
+
+> [!IMPORTANT]
+> **Note on Terminology** > **ChGLEU** is the name of this **toolkit**. The metric it calculates is the **Character-level GLEU**.  
+> When reporting results in academic papers, we recommend referring to the metric as **"Character-level GLEU"** or simply **"GLEU"** (with a note on character-level granularity), rather than "ChGLEU score".  
+
 This repository contains a Python implementation of **ChGLEU**, a specialized evaluation tool for **Chinese Grammatical Error Correction (CGEC)** tasks.
 
 ChGLEU is adapted from GLEU proposed by Napoles et al. (2015, 2016). While the original GLEU was designed for English, **ChGLEU** is optimized for Chinese by employing **character-level n-gram** calculation to better handle Chinese issues.
