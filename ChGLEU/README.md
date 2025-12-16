@@ -1,7 +1,11 @@
-# ChGLEU: Fluency-Oriented Evaluation Tool for Chinese Grammatical Error Correction
-This repository contains a Python implementation of **ChGLEU**, a specialized evaluation tool for **Chinese Grammatical Error Correction (CGEC)** tasks.
+# ChGLEU: Fluency-Based Evaluation Tool for Chinese Grammatical Error Correction  
 
-ChGLEU is adapted from GLEU proposed by Napoles et al. (2015, 2016). While the original GLEU was designed for English, **ChGLEU** is optimized for Chinese by employing **character-level n-gram** calculation to better handle Chinese issues.
+This repository contains a Python implementation of **ChGLEU**, a specialized evaluation tool for **Chinese Grammatical Error Correction (CGEC)** tasks.  
+
+ChGLEU is adapted from GLEU proposed by Napoles et al. (2015, 2016). While the original GLEU was designed for English, **ChGLEU** is optimized for Chinese by employing **character-level n-gram** calculation to better handle Chinese issues.  
+
+>**ChGLEU** is the name of this toolkit.  
+>The metric it calculates is the **Character-level GLEU**. When reporting results, please refer to the score as **"Character-level GLEU"** (specifying granularity) or **"GLEU"**, rather than "ChGLEU score".  
 
 ## Acknowledgments
 This implementation is based on the logic described in the following papers. If you use the GLEU methodology, please acknowledge the original authors:  
@@ -15,7 +19,7 @@ Traditional tools like **M2 (MaxMatch)** or **ChERRANT** are designed for *Minim
 **ChGLEU**, following the design of GLEU, is **Fluency-Oriented**. It is particularly suitable for evaluating **Large Language Models (LLMs)** for the following reasons:
 1.  **Reward for Fluency**: M2 / ChERRANT relies on strict span-level alignment. Unlike them, ChGLEU calculates character-level n-gram overlap. This allows it to reward substantial rewrites and stylistic improvements that align with human references, rather than just fixing localized grammatical errors.
 2.  **Penalty for Unchanged Errors**: ChGLEU also explicitly penalizes n-grams present in the Source (incorrect) but absent in the Reference (correct).
-3.  **Robustness to Over-Correction**: Modern LLMs tend to "over-correct" or polish text. M2 often scores these valid but non-minimal edits as false positives (low precision). The result of ChGLEU (character-level GLEU score) correlates much better with human judgments in these high-fluency scenarios.
+3.  **Robustness to Over-Correction**: Modern LLMs tend to "over-correct" or polish text. M2 often scores these valid but non-minimal edits as false positives (low precision). The result by ChGLEU (character-level GLEU score) correlates much better with human judgments in these high-fluency scenarios.
 
 ## Features
 - **Fluency-Oriented Evaluation**: Unlike M2 or ChERRANT which focus on minimal edits, ChGLEU rewards holistic sentence quality and naturalness, making it ideal for evaluating **Large Language Models (LLMs)** that tend to rewrite or polish text.
@@ -89,7 +93,7 @@ result_dict = chgleu_scorer.compute_chgleu(
 
 ## Output Format
 The script outputs a dictionary (or list of dictionaries) containing:
-- **ChGLEU**: The mean character-lecel GLEU score.
+- **ChGLEU**: The mean character-level GLEU score.
 - **std_dev**: The standard deviation across resampling iterations (if bootstrap resampling).
 - **95%_ci**: The lower and upper bounds of the 95% confidence interval (if bootstrap resampling).
 
@@ -101,11 +105,8 @@ Example output:
 ## Note
 ChGLEU is adapted from the 2016 version of GLEU (GLEU+ / GLEU WITHOUT TUNING).  
 As GLEU+, the penalty weight for mis-correction is removed, and the reference matching method is updated in ChGLEU.  
-If you need the original version, see `chgleu_tuning.py` in `ChGLEU_tuning`  
+If you need the original version, see `chgleu_tuning.py` in `ChGLEU_tuning`
 
 ## By
-**Wu Jiajun**  
+**Wu J. J.**  
 <https://github.com/jwj1111/ChGLEU>
-
-
-
