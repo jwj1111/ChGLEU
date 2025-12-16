@@ -9,7 +9,7 @@ class ChGLEUScorer:
     08 December 2025
 
     chgleu.py
-    This script calculates the ChGLEU score for CGEC tasks.
+    This script calculates the character-level GLEU score for CGEC tasks.
 
     How to use it:
     1. from chgleu_tuning import ChGLEUScorer
@@ -53,7 +53,7 @@ class ChGLEUScorer:
 
     def chgleu_stats(self, hypothesis: List[str], references: List[List[str]], source: List[str]) -> Generator[Union[int, float], None, None]:
         """
-        Collect the sufficient statistics for ChGLEU (Chinese GLEU) for a single sentence.
+        Collect the sufficient statistics for the character-level GLEU score of a single sentence.
 
         Args:
             hypothesis: List of tokens representing the hypothesis sentence.
@@ -63,7 +63,7 @@ class ChGLEUScorer:
         Yields:
             This function acts as a generator. It does not directly calculate the final score but yields
             intermediate statistics for subsequent aggregation by the user.
-            To calculate ChGLEU at the corpus level, these statistics must be summed element-wise across all sentences.
+            To calculate GLEU at the corpus level, these statistics must be summed element-wise across all sentences.
 
             c (int): Length of the hypothesis sentence (used for the brevity penalty denominator).
             r (int): Length of the reference sentence (used for the brevity penalty numerator).
@@ -121,14 +121,14 @@ class ChGLEUScorer:
 
     def chgleu(self, stats: List[Union[int, float]]) -> float:
         """
-        Calculates the single-sentence or corpus-level ChGLEU score based on the accumulated statistics.
+        Calculates the single-sentence or corpus-level GLEU score based on the accumulated statistics.
 
         Args:
             stats: A list containing c, r, and the n-gram statistic pairs.
                    Example: [c, r, numerator1, denominator1, ... numerator4, denominator4]
             
         Returns:
-            float: The calculated ChGLEU score.
+            float: The calculated character-level GLEU score.
         """
         order = self.order
         # Zero value check: If c, r, any numerator, or any denominator is zero, return 0.0 immediately.
@@ -150,13 +150,13 @@ class ChGLEUScorer:
 
         # Calculate the brevity penalty term (BP).
         bp = min(0.0, 1.0 - r / c)
-        # Calculate the final ChGLEU score: exp(BP + Mean Log Precision)
-        chgleu_score = math.exp(bp + log_prec_mean)
-        return chgleu_score
+        # Calculate the final GLEU score: exp(BP + Mean Log Precision)
+        gleu_score = math.exp(bp + log_prec_mean)
+        return gleu_score
 
     def compute_chgleu(self, hyp_file: str, src_file: str, ref_files: List[str]) -> float:
         """
-        Computes the ChGLEU score for a single batch of corpus data (hypothesis + source + reference(s)).
+        Computes the character-level GLEU score for a single batch of corpus data (hypothesis + source + reference(s)).
 
         Args:
             hyp_file: Path to the hypothesis file (one sentence per line).
@@ -164,7 +164,7 @@ class ChGLEUScorer:
             ref_files: List of paths to reference files (one sentence per line).
 
         Returns:
-            float: The computed ChGLEU score for the given corpus.
+            float: The computed character-level GLEU score for the given corpus.
         """
         order = self.order
         # Preprocessing: Tokenize by Chinese character (char-level) rather than word-level segmentation
@@ -189,7 +189,7 @@ class ChGLEUScorer:
                 else:
                     raise ValueError(f"Line count mismatch: Reference {ref_file} ({len(temp_lines)}) vs Hypothesis ({len(refs_lines)})")
 
-        # 2. Calculate ChGLEU statistics
+        # 2. Calculate GLEU statistics
         stats = [0.0 for _ in range(2 * order + 2)]
         # for each sentence pair
         for hyp, src, ref_list in zip(hyp_lines, src_lines, refs_lines):
@@ -198,13 +198,13 @@ class ChGLEUScorer:
             # accumulating
             stats = [sum(scores) for scores in zip(stats, present_stats)]
 
-        # 3. Calculate the ChGLEU score for this batch of data
-        chgleu_score = self.chgleu(stats)
-        return chgleu_score
+        # 3. Calculate the GLEU score for this batch of data
+        gleu_score = self.chgleu(stats)
+        return gleu_score
 
     def batch_compute_chgleu(self, hyp_files: List[str], src_file: str, ref_files: List[str]) -> List[Dict]:
         """
-        Computes the ChGLEU score for batches of corpus data (multiple hypothesis files).
+        Computes the character-level GLEU score for batches of corpus data (multiple hypothesis files).
 
         Args:
             hyp_files: List of paths to hypothesis files (one sentence per line).
@@ -215,19 +215,19 @@ class ChGLEUScorer:
         Returns:
             List[Dict]: A list of dictionaries. Each dictionary contains:
                 "file_id": The path of the hypothesis file.
-                "ChGLEU": ChGLEU score.
+                "ChGLEU": character-level GLEU score.
         """
         batch_results = []
         for hyp_file in hyp_files:
-            chgleu_score = self.compute_chgleu(hyp_file = hyp_file, src_file = src_file, ref_files = ref_files)
-            batch_results.append({"file_id": hyp_file, "ChGLEU": chgleu_score})
+            gleu_score = self.compute_chgleu(hyp_file = hyp_file, src_file = src_file, ref_files = ref_files)
+            batch_results.append({"file_id": hyp_file, "ChGLEU": gleu_score})
         return batch_results
     
 def run_batch():
     """
     For Demonstration
     """
-    parser = argparse.ArgumentParser(description="Compute ChGLEU score for CGEC tasks.")
+    parser = argparse.ArgumentParser(description="Compute character-level GLEU score for CGEC tasks.")
     parser.add_argument("-r", "--reference",
                         help = "Chinese reference sentences. Multiple files for multiple references.",
                         nargs = "*",
@@ -238,7 +238,7 @@ def run_batch():
                         dest = "source",
                         required = True)
     parser.add_argument("-o", "--hypothesis",
-                        help = "Chinese hypothesis sentences to evaluate (can be more than one file--the ChGLEU score of each file will be printed)",
+                        help = "Chinese hypothesis sentences to evaluate (can be more than one file--the character-level GLEU score of each file will be printed)",
                         nargs = "*",
                         dest = "hypothesis",
                         required = True)
@@ -258,5 +258,4 @@ def run_batch():
         print(batch_result)
 
 if __name__ == '__main__':
-
     run_batch()
